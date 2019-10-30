@@ -1,6 +1,7 @@
 import request from 'superagent'
 export const ADD_USER = 'ADD_USER'
 export const LOG_IN = 'LOG_IN'
+export const GET_DINOSAURS = 'GET_DINOSAURS'
 const url = 'http://localhost:8888'
 
 
@@ -20,6 +21,7 @@ function signUp(payload) {
         // dispatch(status)
         const action=signUp(res.body)
         dispatch(action)
+        
         console.log('success')
       }).catch(error=>{
         console.log(error)
@@ -47,3 +49,22 @@ function signUp(payload) {
         console.log('error:', error.response.body) 
       })
   }
+
+function getDinosaursAction(payload) {
+    return {
+        type: GET_DINOSAURS,
+        payload: payload
+    }
+}
+
+export const getDinosaurs= () => (dispatch) => {
+    request
+        .get(`${url}/dinosaur`)
+        .then(res => {
+            const action = getDinosaursAction(res.body)
+            dispatch(action)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}

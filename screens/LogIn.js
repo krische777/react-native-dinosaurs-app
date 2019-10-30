@@ -1,10 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, TextInput, 
-         Button, Text } from 'react-native'
-import {userLogin} from '../actions'
-
+import {
+    View, TextInput,TouchableOpacity,
+    Button, Text, StyleSheet
+} from 'react-native'
+import { userLogin } from '../actions'
+import Details from './Details'
 class LogIn extends Component {
+    // componentDidMount() {
+    //     this.checkJWT();
+    // }
+    static navigationOptions = {
+        title: 'LOG IN',
+    };
     constructor(props) {
         super(props);
 
@@ -33,15 +41,21 @@ class LogIn extends Component {
             username: '',
             password: '',
         })
+
     }
 
-    onRedirect = (event) => {
-    }
+    // checkJWT = () => {
+    //     this.props.navigation.navigate(this.props.user.jwt ? 'Details' : 'LogIn');
+    // };
 
 
     render() {
+        if(this.props.user.jwt) {
+            this.props.navigation.navigate('Details')
+            return <Details navigation={this.props.navigation}/>
+        }
         return (
-            <View>  
+            <View style={styles.container}  >
 
                 <TextInput
                     value={this.state.username}
@@ -62,20 +76,31 @@ class LogIn extends Component {
                     title={'Log in'}
                     onPress={this.onLogin}
                 />
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('SignUp')}>
+                    <Text>If you are not registered yet, sign up <Text style={{color: 'blue'}}>here</Text></Text>
+                </TouchableOpacity>
 
-                <Text>
+                {/* <Text>
                     If you are not registered yet, sign up
-                </Text> 
-                <Button title={'here'} onPress={this.onRedirect}/>
-
+                </Text>
+                <Button title={'here'} onPress={() => {
+                    this.props.navigation.navigate('SignUp');
+                }} /> */}
             </View>
         )
     }
 }
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
 
 const mapStateToProps = (state) => {
     return {
-        user: state.signupReducer
+        user: state.loginReducer
     };
 }
 

@@ -1,14 +1,18 @@
 import store from './store'
 import { Provider } from 'react-redux'
 import React from 'react';
-import {SafeAreaView,View,StatusBar} from 'react-native';
+import {SafeAreaView,View,Text,
+   StatusBar, StyleSheet} from 'react-native';
 import SignUp from './screens/SignUp'
+import LogIn from './screens/LogIn'
+import Details from './screens/Details'
 import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 
+
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'SignUp',
+    title: 'SIGN UP',
   };
   constructor(props) {
     super(props);
@@ -17,13 +21,21 @@ class HomeScreen extends React.Component {
     };
   }
   render() {
+    console.log('navigation in app.js', this.props.navigation.navigate)
     return (
-      <View style={styles.container}>
+      <View  style={styles.container} >
         <SignUp navigation={this.props.navigation} />
       </View>
     );
   }
 }
+const styles=StyleSheet.create({
+  container: {
+   flex: 1,
+   alignItems: 'center',
+   justifyContent: 'center',
+}, });
+
 const AppNavigator = createStackNavigator(
   {
     Home: {
@@ -35,12 +47,15 @@ const AppNavigator = createStackNavigator(
     LogIn: {
       screen: LogIn,
     },
+    Details: {
+      screen: Details
+    }
   },
   {
     initialRouteName: 'Home',
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: '#f4511e',
+        backgroundColor: 'lightgreen',
       },
       headerTitleStyle: {
         fontWeight: 'bold',
@@ -55,7 +70,7 @@ const App= ()=> {
   return (
     <Provider store={store}>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
+      <SafeAreaView style={{ flex: 1 }}>
     {/* <SignUp styles={this.styles}/> */}
     <AppContainer />
       </SafeAreaView>

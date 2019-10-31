@@ -60,17 +60,20 @@ class SignUp extends Component {
         //   }
         if(this.props.user.username) {
             this.props.navigation.navigate('LogIn')
-            return <LogIn navigation={this.props.navigation}/>
+            return <View style={styles.container}><LogIn  navigation={this.props.navigation}/></View>
+            
         }
         return (
 
             <View style={styles.container}>
-                <Text>Welcome to the dinosaurs app</Text>
+                
+
                 <TextInput
                     value={this.state.username}
                     onChangeText={this.onChangeName}
                     placeholder="Username"
-                    style={{ height: 35 }}
+                    style={{ height: 35 , borderColor: 'gray', borderWidth: 1
+                    }}
                 />
 
                 <TextInput
@@ -79,6 +82,7 @@ class SignUp extends Component {
                     placeholder="Password"
                     secureTextEntry={true}
                     style={{ height: 35 }}
+                    style={{ height: 40, borderColor: 'gray', borderWidth: 1}}
 
                 />
 
@@ -90,13 +94,6 @@ class SignUp extends Component {
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('LogIn')}>
                     <Text>If you already have an account, log in <Text style={{ color: 'blue' }}>here</Text></Text>
                 </TouchableOpacity>
-                {/* <Text>
-                    If you already have an account, log in
-                </Text>
-                <Button title={'here'} onPress={() => {
-                    this.props.navigation.navigate('LogIn');
-                }} /> */}
-
             </View>
           )
     }
@@ -104,7 +101,7 @@ class SignUp extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
+        //alignItems: 'center',
         justifyContent: 'center',
     },
 });

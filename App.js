@@ -24,6 +24,7 @@ class HomeScreen extends React.Component {
     console.log('navigation in app.js', this.props.navigation.navigate)
     return (
       <View  style={styles.container} >
+        <Text styles={{alignItems: 'center', justifyContent: 'center', flex: 2}}>Welcome to the dinosaurs app</Text>
         <SignUp navigation={this.props.navigation} />
       </View>
     );
@@ -32,7 +33,7 @@ class HomeScreen extends React.Component {
 const styles=StyleSheet.create({
   container: {
    flex: 1,
-   alignItems: 'center',
+   //alignItems: 'center',
    justifyContent: 'center',
 }, });
 

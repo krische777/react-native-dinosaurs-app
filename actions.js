@@ -61,6 +61,7 @@ export const getDinosaurs= () => (dispatch) => {
     request
         .get(`${url}/dinosaur`)
         .then(res => {
+          console.log('res body', res.body)
             const action = getDinosaursAction(res.body)
             dispatch(action)
         })

@@ -6,7 +6,13 @@ import {
 } from 'react-native'
 import { userLogin } from '../actions'
 import Details from './Details'
+import {getDinosaurs} from '../actions'
+
+
 class LogIn extends Component {
+    componentDidMount() {
+        this.props.getDinosaurs()
+      }
     // componentDidMount() {
     //     this.checkJWT();
     // }
@@ -55,13 +61,13 @@ class LogIn extends Component {
             return <Details navigation={this.props.navigation}/>
         }
         return (
-            <View style={styles.container}  >
+            <View style={styles.container}>
 
                 <TextInput
                     value={this.state.username}
                     onChangeText={this.onChangeName}
                     placeholder="Username"
-                    style={{ height: 35 }}
+                    style={{ height: 35, borderColor: 'gray', borderWidth: 1 }}
                 />
 
                 <TextInput
@@ -69,7 +75,7 @@ class LogIn extends Component {
                     onChangeText={this.onChangePassword}
                     placeholder="Password"
                     secureTextEntry={true}
-                    style={{ height: 35 }}
+                    style={{ height: 35, borderColor: 'gray', borderWidth: 1 }}
                 />
 
                 <Button
@@ -80,12 +86,6 @@ class LogIn extends Component {
                     <Text>If you are not registered yet, sign up <Text style={{color: 'blue'}}>here</Text></Text>
                 </TouchableOpacity>
 
-                {/* <Text>
-                    If you are not registered yet, sign up
-                </Text>
-                <Button title={'here'} onPress={() => {
-                    this.props.navigation.navigate('SignUp');
-                }} /> */}
             </View>
         )
     }
@@ -93,16 +93,17 @@ class LogIn extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
+        //alignItems: 'center',
         justifyContent: 'center',
     },
 });
 
 const mapStateToProps = (state) => {
     return {
-        user: state.loginReducer
+        user: state.loginReducer,
+        dinosaursState: state.dinosaursReducer
     };
 }
 
 
-export default connect(mapStateToProps, { userLogin })(LogIn)
+export default connect(mapStateToProps, { userLogin, getDinosaurs })(LogIn)

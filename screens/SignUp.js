@@ -18,14 +18,8 @@ class SignUp extends Component {
         this.state = {
             username: '',
             password: '',
-            
-        };
-    }
 
-    componentDidMount() {
-        // if(this.props.user.username) {
-        //     this.props.navigation.navigate('LogIn')
-        // }
+        };
     }
 
     onChangeName = (input) => {
@@ -55,24 +49,22 @@ class SignUp extends Component {
     render() {
         console.log('this.props.user', this.props.user)
         console.log('navigation', this.props.navigation)
-        // if(this.props.user.username){
-        //     return <LogIn/>
-        //   }
-        if(this.props.user.username) {
+
+        if (this.props.user.username) {
             this.props.navigation.navigate('LogIn')
-            return <View style={styles.container}><LogIn  navigation={this.props.navigation}/></View>
-            
+            return <View style={styles.container}><LogIn navigation={this.props.navigation} /></View>
+
         }
         return (
 
             <View style={styles.container}>
-                
 
                 <TextInput
                     value={this.state.username}
                     onChangeText={this.onChangeName}
                     placeholder="Username"
-                    style={{ height: 35 , borderColor: 'gray', borderWidth: 1
+                    style={{
+                        height: 35, borderColor: 'gray', borderWidth: 1, backgroundColor: '#e6ff99'
                     }}
                 />
 
@@ -82,7 +74,7 @@ class SignUp extends Component {
                     placeholder="Password"
                     secureTextEntry={true}
                     style={{ height: 35 }}
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1}}
+                    style={{ height: 40, borderColor: 'gray', borderWidth: 1, backgroundColor: '#e6ff99' }}
 
                 />
 
@@ -95,14 +87,16 @@ class SignUp extends Component {
                     <Text>If you already have an account, log in <Text style={{ color: 'blue' }}>here</Text></Text>
                 </TouchableOpacity>
             </View>
-          )
+        )
     }
 }
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: '#bad184',
+        paddingLeft: 100,
+        paddingRight: 100
     },
 });
 
